@@ -108,6 +108,22 @@ $ npm start
 
   View the website at: http://localhost:3000
 
+## Support
+
+We will continue to release bug and security fixes for the current version (4) until version 5 is ready. The previous versions are end of life and will not receive any security or bug fixes.
+
+Our partner, HeroDevs, provides commercial security fixes for all unsupported versions. See [https://herodevs.com/nes](https://herodevs.com/nes).
+
+Version Support
+
+ Version | Supported? |  Commercial Support
+ ------------- |---------------------|---------------------
+ 5               | YES (in beta)
+ 4               | YES |
+ 3               | NO | [`Available Here`](https://herodevs.com/nes)
+ 2               | NO | [`Available Here`](https://herodevs.com/nes)
+ 1               | NO | [`Available Here`](https://herodevs.com/nes)
+
 ## Philosophy
 
   The Express philosophy is to provide small, robust tooling for HTTP servers, making
