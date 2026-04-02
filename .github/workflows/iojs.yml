@@ -31,39 +31,39 @@ jobs:
             npm-i: "mocha@3.5.3 nyc@10.3.2 supertest@2.0.0"
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # ratchet:actions/checkout@v4
 
-    - name: Install iojs ${{ matrix.node-version }}
-      shell: bash -eo pipefail -l {0}
-      run: |
-        nvm install --default ${{ matrix.node-version }}
-        dirname "$(nvm which ${{ matrix.node-version }})" >> "$GITHUB_PATH"
+      - name: Install iojs ${{ matrix.node-version }}
+        shell: bash -eo pipefail -l {0}
+        run: |
+          nvm install --default ${{ matrix.node-version }}
+          dirname "$(nvm which ${{ matrix.node-version }})" >> "$GITHUB_PATH"
 
-    - name: Configure npm
-      run: |
-        npm config set loglevel error
-        npm config set shrinkwrap false
+      - name: Configure npm
+        run: |
+          npm config set loglevel error
+          npm config set shrinkwrap false
 
-    - name: Install npm module(s) ${{ matrix.npm-i }}
-      run: npm install --save-dev ${{ matrix.npm-i }}
-      if: matrix.npm-i != ''
+      - name: Install npm module(s) ${{ matrix.npm-i }}
+        run: npm install --save-dev ${{ matrix.npm-i }}
+        if: matrix.npm-i != ''
 
-    - name: Remove non-test dependencies
-      run: npm rm --silent --save-dev connect-redis
+      - name: Remove non-test dependencies
+        run: npm rm --silent --save-dev connect-redis
 
-    - name: Install Node.js dependencies
-      run: npm install
+      - name: Install Node.js dependencies
+        run: npm install
 
-    - name: List environment
-      id: list_env
-      shell: bash
-      run: |
-        echo "node@$(node -v)"
-        echo "npm@$(npm -v)"
-        npm -s ls ||:
-        (npm -s ls --depth=0 ||:) | awk -F'[ @]' 'NR>1 && $2 { print $2 "=" $3 }' >> "$GITHUB_OUTPUT"
+      - name: List environment
+        id: list_env
+        shell: bash
+        run: |
+          echo "node@$(node -v)"
+          echo "npm@$(npm -v)"
+          npm -s ls ||:
+          (npm -s ls --depth=0 ||:) | awk -F'[ @]' 'NR>1 && $2 { print $2 "=" $3 }' >> "$GITHUB_OUTPUT"
 
-    - name: Run tests
-      shell: bash
-      run: npm run test
+      - name: Run tests
+        shell: bash
+        run: npm run test
 
